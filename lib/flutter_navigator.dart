@@ -7,6 +7,14 @@ import 'package:flutter/material.dart';
 class MopNavigator {
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey();
 
+  /// 输出一个弹窗
+  static Future<T> dialog<T>(WidgetBuilder builder) {
+    return showDialog(
+      context: navigatorKey.currentContext,
+      builder: builder
+    );
+  }
+
   /// Push a named route onto the navigator that most tightly encloses the given
   /// context.
   static Future<T> pushNamed<T>(String name, { Map<String, dynamic> arguments }) {
