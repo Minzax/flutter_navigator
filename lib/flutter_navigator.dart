@@ -7,10 +7,21 @@ import 'package:flutter/material.dart';
 class MopNavigator {
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey();
 
+  /// 弹窗关联上下文
+  static BuildContext _diglogCtx;
+
+  /// 注入一个弹窗的context
+  static injectDiglogContext(BuildContext context) {
+    if(_diglogCtx == null) {
+      _diglogCtx = context;
+    }
+  }
+
   /// 输出一个弹窗
   static Future<T> dialog<T>(WidgetBuilder builder) {
+    if(_diglogCtx == null) return Future.error('未初始化注入上下文');
     return showDialog(
-      context: navigatorKey.currentContext,
+      context: _diglogCtx,
       builder: builder
     );
   }
