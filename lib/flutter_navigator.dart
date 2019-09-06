@@ -7,15 +7,15 @@ import 'package:flutter/material.dart';
 class MopNavigator {
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey();
 
-  /// 弹窗关联上下文
-  static BuildContext _diglogCtx;
+  // /// 弹窗关联上下文
+  // static BuildContext _diglogCtx;
 
-  /// 注入一个弹窗的context
-  static injectDiglogContext(BuildContext context) {
-    if(_diglogCtx == null) {
-      _diglogCtx = context;
-    }
-  }
+  // /// 注入一个弹窗的context
+  // static injectDiglogContext(BuildContext context) {
+  //   if(_diglogCtx == null) {
+  //     _diglogCtx = context;
+  //   }
+  // }
 
   /// 输出一个弹窗
   ///
@@ -29,7 +29,8 @@ class MopNavigator {
     Color barrierColor = Colors.black54,
     transitionDuration: const Duration(milliseconds: 150)
   }) {
-    assert(builder != null && _diglogCtx != null);
+    assert(builder != null);
+    final BuildContext _diglogCtx = navigatorKey.currentState.overlay.context;
     final ThemeData theme = Theme.of(_diglogCtx, shadowThemeOnly: true);
     return showGeneralDialog(
       context: _diglogCtx,
