@@ -18,11 +18,16 @@ class MopNavigator {
   }
 
   /// 输出一个弹窗
-  static Future<T> dialog<T>(WidgetBuilder builder) {
+  ///
+  /// @param barrierDismissible 是否点击其他区域消失
+  static Future<T> dialog<T>(WidgetBuilder builder, {
+    bool barrierDismissible = true,
+  }) {
     if(_diglogCtx == null) return Future.error('未初始化注入上下文');
     return showDialog(
       context: _diglogCtx,
-      builder: builder
+      builder: builder,
+      barrierDismissible: barrierDismissible
     );
   }
 
