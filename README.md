@@ -1,4 +1,4 @@
-# flutter_navigator
+# flutter_global_navigator
 
 Flutter中实现无Context跳转
 

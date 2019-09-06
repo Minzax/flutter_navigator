@@ -1,21 +1,11 @@
-library flutter_navigator;
+library flutter_global_navigator;
 
 import 'package:flutter/material.dart';
 
 /// Mop导航类
 /// 实现无Context跳转功能
-class MopNavigator {
+class GlobalNavigator {
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey();
-
-  // /// 弹窗关联上下文
-  // static BuildContext _diglogCtx;
-
-  // /// 注入一个弹窗的context
-  // static injectDiglogContext(BuildContext context) {
-  //   if(_diglogCtx == null) {
-  //     _diglogCtx = context;
-  //   }
-  // }
 
   /// 输出一个弹窗
   ///

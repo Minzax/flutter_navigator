@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_navigator/flutter_navigator.dart';
+import 'package:flutter_global_navigator/flutter_global_navigator.dart';
 
 void main() => runApp(MyApp());
 
@@ -7,7 +7,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      navigatorKey: MopNavigator.navigatorKey,
+      navigatorKey: GlobalNavigator.navigatorKey,
       routes: {
         '/': (context) => MyHomePage()
       },
@@ -51,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   void _incrementCounter() {
-    MopNavigator.dialog(
+    GlobalNavigator.dialog(
       barrierColor: null,
       builder: (context) => new Theme(
         data: Theme.of(context).copyWith(

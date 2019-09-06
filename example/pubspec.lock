@@ -41,7 +41,7 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_navigator:
+  flutter_global_navigator:
     dependency: "direct main"
     description:
       path: ".."

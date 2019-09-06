@@ -1,8 +1,8 @@
-name: flutter_navigator
+name: flutter_global_navigator
 description: A new Flutter package project.
 version: 0.1.3
-author:
-homepage:
+author: Minzax
+homepage: https://github.com/Minzax/flutter_navigator.git
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
