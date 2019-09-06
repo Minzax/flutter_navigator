@@ -29,7 +29,7 @@ class MopNavigator {
     Color barrierColor = Colors.black54,
     transitionDuration: const Duration(milliseconds: 150)
   }) {
-    assert(builder == null || _diglogCtx == null);
+    assert(builder != null && _diglogCtx != null);
     final ThemeData theme = Theme.of(_diglogCtx, shadowThemeOnly: true);
     return showGeneralDialog(
       context: _diglogCtx,
