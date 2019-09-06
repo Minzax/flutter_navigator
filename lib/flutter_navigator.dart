@@ -23,12 +23,13 @@ class MopNavigator {
   /// @param barrierColor 背景色
   /// @param transitionDuration 弹出的过渡时长
   ///
-  static Future<T> dialog<T>(WidgetBuilder builder, {
+  static Future<T> dialog<T>({
+    @required WidgetBuilder builder,
     bool barrierDismissible = true,
     Color barrierColor = Colors.black54,
     transitionDuration: const Duration(milliseconds: 150)
   }) {
-    if(_diglogCtx == null) return Future.error('未初始化注入上下文');
+    assert(builder == null || _diglogCtx == null);
     final ThemeData theme = Theme.of(_diglogCtx, shadowThemeOnly: true);
     return showGeneralDialog(
       context: _diglogCtx,
