@@ -20,14 +20,35 @@ class MopNavigator {
   /// 输出一个弹窗
   ///
   /// @param barrierDismissible 是否点击其他区域消失
+  /// @param barrierColor 背景色
+  /// @param transitionDuration 弹出的过渡时长
+  ///
   static Future<T> dialog<T>(WidgetBuilder builder, {
     bool barrierDismissible = true,
+    Color barrierColor = Colors.black54,
+    transitionDuration: const Duration(milliseconds: 150)
   }) {
     if(_diglogCtx == null) return Future.error('未初始化注入上下文');
-    return showDialog(
+    final ThemeData theme = Theme.of(_diglogCtx, shadowThemeOnly: true);
+    return showGeneralDialog(
       context: _diglogCtx,
-      builder: builder,
-      barrierDismissible: barrierDismissible
+      barrierDismissible: barrierDismissible,
+      barrierLabel: MaterialLocalizations.of(_diglogCtx).modalBarrierDismissLabel,
+      barrierColor: barrierColor,
+      transitionDuration: transitionDuration,
+      transitionBuilder: _buildMaterialDialogTransitions,
+      pageBuilder: (BuildContext buildContext, Animation<double> animation, Animation<double> secondaryAnimation) {
+        final Widget pageChild = Builder(builder: builder);
+        return SafeArea(
+          child: Builder(
+            builder: (BuildContext context) {
+              return theme != null
+                  ? Theme(data: theme, child: pageChild)
+                  : pageChild;
+            }
+          ),
+        );
+      },
     );
   }
 
@@ -141,4 +162,14 @@ class MopNavigator {
   static void removeRouteBelow(BuildContext context, Route<dynamic> anchorRoute) {
     return navigatorKey.currentState.removeRouteBelow(anchorRoute);
   }
+}
+
+Widget _buildMaterialDialogTransitions(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
+  return FadeTransition(
+    opacity: CurvedAnimation(
+      parent: animation,
+      curve: Curves.easeOut,
+    ),
+    child: child,
+  );
 }
