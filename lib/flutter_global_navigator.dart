@@ -64,7 +64,6 @@ class GlobalNavigator {
   /// Pop the current route off the navigator that most tightly encloses the
   /// given context and push a named route in its place.
   static Future<T> popAndPushNamed<T extends Object, TO extends Object>(
-    BuildContext context,
     String routeName, {
     TO result,
     Object arguments,
@@ -76,7 +75,6 @@ class GlobalNavigator {
   /// encloses the given context, and then remove all the previous routes until
   /// the `predicate` returns true.
   static Future<T> pushNamedAndRemoveUntil<T extends Object>(
-    BuildContext context,
     String newRouteName,
     RoutePredicate predicate, {
     Object arguments,
@@ -93,65 +91,64 @@ class GlobalNavigator {
   /// Replace the current route of the navigator that most tightly encloses the
   /// given context by pushing the given route and then disposing the previous
   /// route once the new route has finished animating in.
-  static Future<T> pushReplacement<T extends Object, TO extends Object>(BuildContext context, Route<T> newRoute, { TO result }) {
+  static Future<T> pushReplacement<T extends Object, TO extends Object>(Route<T> newRoute, { TO result }) {
     return navigatorKey.currentState.pushReplacement<T, TO>(newRoute, result: result);
   }
 
   /// Push the given route onto the navigator that most tightly encloses the
   /// given context, and then remove all the previous routes until the
   /// `predicate` returns true.
-  static Future<T> pushAndRemoveUntil<T extends Object>(BuildContext context, Route<T> newRoute, RoutePredicate predicate) {
+  static Future<T> pushAndRemoveUntil<T extends Object>(Route<T> newRoute, RoutePredicate predicate) {
     return navigatorKey.currentState.pushAndRemoveUntil<T>(newRoute, predicate);
   }
 
   /// Replaces a route on the navigator that most tightly encloses the given
   /// context with a new route.
-  static void replace<T extends Object>(BuildContext context, { @required Route<dynamic> oldRoute, @required Route<T> newRoute }) {
+  static void replace<T extends Object>({ @required Route<dynamic> oldRoute, @required Route<T> newRoute }) {
     return navigatorKey.currentState.replace<T>(oldRoute: oldRoute, newRoute: newRoute);
   }
 
   /// Replaces a route on the navigator that most tightly encloses the given
   /// context with a new route. The route to be replaced is the one below the
   /// given `anchorRoute`.
-  static void replaceRouteBelow<T extends Object>(BuildContext context, { @required Route<dynamic> anchorRoute, Route<T> newRoute }) {
+  static void replaceRouteBelow<T extends Object>({ @required Route<dynamic> anchorRoute, Route<T> newRoute }) {
     return navigatorKey.currentState.replaceRouteBelow<T>(anchorRoute: anchorRoute, newRoute: newRoute);
   }
 
   /// Whether the navigator that most tightly encloses the given context can be
   /// popped.
-  static bool canPop(BuildContext context) {
-    final NavigatorState navigator = Navigator.of(context, nullOk: true);
-    return navigator != null && navigator.canPop();
+  static bool canPop() {
+    return navigatorKey.currentWidget != null && navigatorKey.currentState.canPop();
   }
 
   /// Returns the value of the current route's [Route.willPop] method for the
   /// navigator that most tightly encloses the given context.
-  static Future<bool> maybePop<T extends Object>(BuildContext context, [ T result ]) {
+  static Future<bool> maybePop<T extends Object>([ T result ]) {
     return navigatorKey.currentState.maybePop<T>(result);
   }
 
   /// Pop the top-most route off the navigator that most tightly encloses the
   /// given context.
-  static bool pop<T extends Object>(BuildContext context, [ T result ]) {
+  static bool pop<T extends Object>([ T result ]) {
     return navigatorKey.currentState.pop<T>(result);
   }
 
   /// Calls [pop] repeatedly on the navigator that most tightly encloses the
   /// given context until the predicate returns true.
-  static void popUntil(BuildContext context, RoutePredicate predicate) {
+  static void popUntil(RoutePredicate predicate) {
     navigatorKey.currentState.popUntil(predicate);
   }
 
   /// Immediately remove `route` from the navigator that most tightly encloses
   /// the given context, and [Route.dispose] it.
-  static void removeRoute(BuildContext context, Route<dynamic> route) {
+  static void removeRoute(Route<dynamic> route) {
     return navigatorKey.currentState.removeRoute(route);
   }
 
   /// Immediately remove a route from the navigator that most tightly encloses
   /// the given context, and [Route.dispose] it. The route to be replaced is the
   /// one below the given `anchorRoute`.
-  static void removeRouteBelow(BuildContext context, Route<dynamic> anchorRoute) {
+  static void removeRouteBelow(Route<dynamic> anchorRoute) {
     return navigatorKey.currentState.removeRouteBelow(anchorRoute);
   }
 }
